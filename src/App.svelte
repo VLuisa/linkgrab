@@ -50,8 +50,10 @@
 </script>
 
 <main>
-  <h1>LinkGrab</h1>
-  <p>Easily grab all the shared links from a zoom call chat.</p>
+  <hgroup>
+    <h1>LinkGrab</h1>
+    <p>Easily grab all the shared links from a zoom call chat .txt file</p>
+  </hgroup>
   <input
     id="uploadInput"
     type="file"
@@ -60,9 +62,9 @@
     aria-busy="true"
   />
   {#if linksArray.length > 0}
-    <div class="result">
+    <div class="grid">
       <div class="left-column">
-        <h3>Zoom chat transcript</h3>
+        <h3>Zoom chat</h3>
         <article class="uploaded-text" bind:this={textContext}>
           {#each fullLines as line}
             <p>{line}</p>
@@ -70,7 +72,11 @@
         </article>
       </div>
       <div class="right-column">
-        <h3>Links in chat</h3>
+        <div class="header">
+          <h3>Links in chat</h3>
+          <button class="secondary outline">Copy links as list</button>
+        </div>
+
         <article class="links">
           {#each linksArray as link}
             <p>- {link}</p>
@@ -85,15 +91,12 @@
   main {
     padding: 2rem;
   }
-  .result {
-    display: flex;
-    flex-flow: row;
-    gap: 1rem;
-  }
-
   .links {
-    min-width: 700px;
-    flex-grow: 3;
     height: fit-content;
+    margin-top: 1rem;
+  }
+  .uploaded-text {
+    font-family: monospace;
+    background-color: var(--pico-background-color);
   }
 </style>
