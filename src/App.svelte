@@ -54,14 +54,17 @@
     <h1>LinkGrab</h1>
     <p>Easily grab all the shared links from a zoom call chat .txt file</p>
   </hgroup>
-  <input
-    id="uploadInput"
-    type="file"
-    onchange={(event) => handleFile(event)}
-    accept=".txt"
-    aria-busy="true"
-  />
-  {#if linksArray.length > 0}
+
+  {#if linksArray.length === 0}
+    <input
+      id="uploadInput"
+      type="file"
+      onchange={(event) => handleFile(event)}
+      accept=".txt"
+      aria-busy="true"
+    />
+  {:else}
+    <p>Refresh to pick new file.</p>
     <div class="grid">
       <div class="left-column">
         <h3>Zoom chat</h3>
