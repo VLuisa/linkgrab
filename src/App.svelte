@@ -57,21 +57,26 @@
     type="file"
     onchange={(event) => handleFile(event)}
     accept=".txt"
+    aria-busy="true"
   />
   {#if linksArray.length > 0}
     <div class="result">
-      <article class="uploaded-text" bind:this={textContext}>
+      <div class="left-column">
         <h3>Zoom chat transcript</h3>
-        {#each fullLines as line}
-          <p>{line}</p>
-        {/each}
-      </article>
-      <article class="links">
+        <article class="uploaded-text" bind:this={textContext}>
+          {#each fullLines as line}
+            <p>{line}</p>
+          {/each}
+        </article>
+      </div>
+      <div class="right-column">
         <h3>Links in chat</h3>
-        {#each linksArray as link}
-          <p>- {link}</p>
-        {/each}
-      </article>
+        <article class="links">
+          {#each linksArray as link}
+            <p>- {link}</p>
+          {/each}
+        </article>
+      </div>
     </div>
   {/if}
 </main>
@@ -90,9 +95,5 @@
     min-width: 700px;
     flex-grow: 3;
     height: fit-content;
-  }
-  pre {
-    white-space: pre-wrap;
-    word-wrap: pre-wrap;
   }
 </style>
