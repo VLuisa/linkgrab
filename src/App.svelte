@@ -8,6 +8,7 @@
   let fullLines = $state();
   let textContext = $state(null);
   let markInstance = $state(null);
+  let linksListElement = $state(null);
 
   let reg = /https?:\/\/[^\s.]+(?:\.[^\s.]+)+(?!\.\.\.)/gim;
 
@@ -25,7 +26,6 @@
     reader.readAsText(file);
 
     reader.onload = () => {
-      console.log(reader.result);
       getLinksFromText(reader.result);
     };
 
@@ -46,6 +46,10 @@
       .filter((line) => !line.includes("Removed a"));
     let filteredText = filteredLines.join("\n");
     linksArray = filteredText.match(reg);
+  };
+
+  const copyTextToClipboard = () => {
+    navigator.clipboard.writeText(linksListElement.innerText);
   };
 </script>
 
@@ -77,10 +81,14 @@
       <div class="right-column">
         <div class="header">
           <h3>Links in chat</h3>
-          <button class="secondary outline">Copy links as list</button>
+          <button
+            class="secondary outline"
+            onclick={copyTextToClipboard}
+            disabled={!linksListElement}>Copy links as list</button
+          >
         </div>
 
-        <article class="links">
+        <article class="links" bind:this={linksListElement}>
           {#each linksArray as link}
             <p>- {link}</p>
           {/each}
