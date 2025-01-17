@@ -68,7 +68,7 @@
       aria-busy="true"
     />
   {:else}
-    <p>Refresh to pick new file.</p>
+    <p>Refresh to a new file.</p>
     <div class="grid">
       <div class="left-column">
         <h3>Zoom chat</h3>
